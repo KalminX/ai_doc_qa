@@ -1,0 +1,58 @@
+@import "tailwindcss";
+@import "katex/dist/katex.min.css";
+
+@layer base {
+  :root {
+    --cyan-accent: #06B6D4;
+    --emerald-accent: #10B981;
+    --bg-dark: #0B0F19;
+    --bg-surface: #131B2E;
+    --bg-dark-alt: #0F172A;
+
+    --border-dark: #1F293D;
+    --text-primary: #F9FAFB;
+    --text-muted: #9CA3AF;
+  }
+
+  body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+/* Custom scrollbar for dark slate theme */
+.custom-scrollbar::-webkit-scrollbar,
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track,
+::-webkit-scrollbar-track {
+  background: #0B0F19;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb {
+  background: #1F293D;
+  border-radius: 3px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:hover {
+  background: #06B6D4;
+}
+
+/* KaTeX equations styling for dark mode */
+.katex-display {
+  margin: 1em 0;
+  padding: 0.85em 1.25em;
+  background-color: #0F172A;
+  border-radius: 0.75rem;
+  border: 1px solid #1E293B;
+  overflow-x: auto;
+  color: #F8FAFC;
+}
+
+.katex {
+  font-size: 1.05em;
+  color: #E2E8F0;
+}
