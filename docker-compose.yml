@@ -1,0 +1,14 @@
+services:
+  backend:
+    build: .
+    container_name: ai_doc_qa_backend
+    env_file:
+      - backend/.env
+    networks:
+      - webproxy
+      - myapp-network
+networks:
+  webproxy:
+    external: true
+  myapp-network:
+    external: true

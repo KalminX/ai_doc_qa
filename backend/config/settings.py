@@ -164,3 +164,9 @@ LOGGING = {
         },
     },
 }
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# Monkeypatch Django's host validation to allow underscores for ai_doc_chat.kalmitech.app
+import django.http.request
+import re
+django.http.request.host_validation_re = re.compile(r"^([a-z0-9.-_]+|\[[a-f0-9]*:[a-f0-9\.:]+\])(:\d+)?$")
