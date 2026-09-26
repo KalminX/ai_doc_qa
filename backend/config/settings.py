@@ -46,7 +46,10 @@ ASGI_APPLICATION = "config.asgi.application"
 
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer"
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [os.getenv("REDIS_URL", "redis://global-redis:6379/4")],
+        },
     }
 }
 
@@ -170,3 +173,9 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 import django.http.request
 import re
 django.http.request.host_validation_re = re.compile(r"^([a-z0-9.-_]+|\[[a-f0-9]*:[a-f0-9\.:]+\])(:\d+)?$")
+
+
+# Celery Configuration
+CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL", "amqp://kalmin:iamasaint@global-rabbitmq:5672//")
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TASK_SERIALIZER = "json"

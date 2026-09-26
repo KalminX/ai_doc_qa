@@ -5,14 +5,12 @@ from channels.layers import get_channel_layer
 
 logger = logging.getLogger("doc_qa.tasks")
 
+from celery import shared_task
+
 def process_document_async(document_id: int):
-    """Spawn a daemon background thread to run PDF extraction, chunking, and embedding."""
-    thread = threading.Thread(
-        target=_process_document,
-        args=(document_id,),
-        daemon=True,
-    )
-    thread.start()
+    # Dispatch to celery instead of thread
+    _process_document.delay(document_id)
+
 
 def send_ws_progress(document_id: int, status: str, stage: str, progress: int, message: str, processed_chunks: int = 0, total_chunks: int = 0, tier: str = "free"):
     """Broadcast real-time document indexing progress to WebSocket subscribers."""
@@ -36,6 +34,7 @@ def send_ws_progress(document_id: int, status: str, stage: str, progress: int, m
     except Exception as e:
         logger.warning(f"Could not send WebSocket progress for doc {document_id}: {e}")
 
+@shared_task
 def _process_document(document_id: int):
     from documents.models import Document
     from services.pdf_service import extract_text

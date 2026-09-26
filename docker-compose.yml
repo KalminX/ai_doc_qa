@@ -7,6 +7,17 @@ services:
     networks:
       - webproxy
       - myapp-network
+
+  celery_worker:
+    build: .
+    container_name: ai_doc_qa_celery
+    command: celery -A config worker --loglevel=info
+    env_file:
+      - backend/.env
+    networks:
+      - webproxy
+      - myapp-network
+
 networks:
   webproxy:
     external: true
