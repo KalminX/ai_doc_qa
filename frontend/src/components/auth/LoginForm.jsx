@@ -38,11 +38,9 @@ export const LoginForm = () => {
         </p>
       </div>
 
-      {error && (
-        <div className="mb-4 p-3 rounded-xl bg-rose-950/60 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2 font-mono">
-          <AlertCircle size={16} /> {error}
-        </div>
-      )}
+      <div className={`mb-4 min-h-[46px] rounded-xl flex items-center transition-all ${error ? "p-3 bg-rose-950/60 border border-rose-500/30 text-rose-300 text-xs font-mono gap-2" : ""}`}>
+        {error && <><AlertCircle size={16} /> {error}</>}
+      </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>

@@ -29,7 +29,7 @@ export const IndexingProgress = ({ docId, initialStatus, tier = "free", onComple
     if (!docId) return;
 
     const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
-    const wsUrl = `${protocol}//localhost:8000/ws/documents/${docId}/`;
+    const wsUrl = `${protocol}//${window.location.host}/ws/documents/${docId}/`;
 
     console.log(`[WebSocket] Connecting to ${wsUrl}`);
     const socket = new WebSocket(wsUrl);
