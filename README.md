@@ -20,6 +20,20 @@ DocIQ lets users upload multi-thousand page PDF textbooks, research papers, and 
 
 ---
 
+## 📸 Application Visual Tour
+
+### 1. Main Workspace Dashboard & Admin Control Center
+![DocIQ Main Workspace Dashboard](./docs/screenshots/workspace_dashboard.png)
+
+### 2. System-Wide Admin Management Panel
+![DocIQ Admin Management Panel Modal](./docs/screenshots/admin_panel_modal.png)
+
+### 3. Authentication Screen (Obsidian Slate Theme)
+![DocIQ Login Screen](./docs/screenshots/login_page.png)
+
+---
+
+
 ## ⚡ Quick Start & Credentials
 
 ### Default Admin Credentials
