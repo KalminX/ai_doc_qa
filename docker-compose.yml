@@ -4,6 +4,8 @@ services:
     container_name: ai_doc_qa_backend
     env_file:
       - backend/.env
+    volumes:
+      - ./backend/media:/app/media
     networks:
       - webproxy
       - myapp-network
@@ -14,6 +16,8 @@ services:
     command: celery -A config worker --loglevel=info
     env_file:
       - backend/.env
+    volumes:
+      - ./backend/media:/app/media
     networks:
       - webproxy
       - myapp-network
