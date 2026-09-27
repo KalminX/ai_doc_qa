@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AppShell } from "../components/layout/AppShell";
 import { DocumentHeader } from "../components/workspace/DocumentHeader";
 import { QuestionInput } from "../components/workspace/QuestionInput";
@@ -20,6 +20,16 @@ export const WorkspacePage = () => {
 
   const { documents, loading: docsLoading, uploadDocument, deleteDocument, refresh: refreshDocs } = useDocuments();
   const { qaHistory, loading: qaLoading, error: qaError, askQuestionStream, handleFinishStreaming } = useQuestions(activeDoc?.id || null);
+
+  // Sync activeDoc when documents array updates (e.g. status changes from processing -> indexed)
+  useEffect(() => {
+    if (activeDoc && documents.length > 0) {
+      const updatedDoc = documents.find(d => d.id === activeDoc.id);
+      if (updatedDoc && (updatedDoc.status !== activeDoc.status || updatedDoc.chunk_count !== activeDoc.chunk_count)) {
+        setActiveDoc(updatedDoc);
+      }
+    }
+  }, [documents, activeDoc]);
 
   const handleAsk = async (questionText) => {
     await askQuestionStream(questionText);
