@@ -74,7 +74,7 @@ def _process_document(document_id: int):
             raise ValueError("No readable text could be extracted from this PDF file.")
 
         # Synthesize clean, neat document title using Gemini LLM
-        sample_text = pages[0]["content"] if pages else ""
+        sample_text = pages[0]["text"] if pages else ""
         try:
             from services.gemini_service import clean_document_title
             clean_title = clean_document_title(doc.filename, sample_text, user_tier)
