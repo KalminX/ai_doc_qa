@@ -31,7 +31,10 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "config.host_patch_middleware.BypassHostCheckMiddleware",
+    "config.debug_middleware.DebugHostMiddleware",
     "corsheaders.middleware.CorsMiddleware",
+    "config.debug_middleware.DebugHostMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -179,3 +182,4 @@ django.http.request.host_validation_re = re.compile(r"^([a-z0-9.-_]+|\[[a-f0-9]*
 CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL", "amqp://kalmin:iamasaint@global-rabbitmq:5672//")
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
+USE_X_FORWARDED_HOST = True
